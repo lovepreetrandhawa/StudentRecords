@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "YourNodeJSInstallationName"
+        nodejs "NodeJS"
         git "YourGitInstallationName"
     }
 
