@@ -1,19 +1,42 @@
-#!/bin/bash
+pipeline {
+    agent any
 
-# Install dependencies
-npm install
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
 
-# Build the project
-npm run build
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh 'npm install'
+                }
+            }
+        }
 
-# Run tests
-npm test
+        stage('Build') {
+            steps {
+                script {
+                    sh 'npm run build'
+                }
+            }
+        }
 
-# Deploy the application to a server
-# Replace the following line with your actual deployment command
-# For example: scp -r ./build user@yourserver.com:/path/to/your/server/directory
-echo "Deployment command goes here"
+        stage('Deploy') {
+            steps {
+                // Add deployment steps (e.g., deploy to hosting platform)
+            }
+        }
+    }
 
-# Clear fields
-echo "Clearing fields..."
-curl -X POST -H "Content-Type: application/json" -d '{"name": "", "grade": ""}' http://localhost:3000/api/studentRecords
+    post {
+        success {
+            echo 'Build and deployment successful!'
+        }
+        failure {
+            echo 'Build or deployment failed!'
+        }
+    }
+}
