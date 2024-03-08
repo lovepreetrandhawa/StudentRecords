@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         nodejs "NodeJS"
-        git "git"
+        git "Git"
     }
 
     stages {
@@ -21,6 +21,14 @@ pipeline {
             }
         }
 
+        stage('Run Tests') {
+            steps {
+                script {
+                    bat 'npm test'
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
@@ -32,6 +40,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Add deployment steps (e.g., deploy to hosting platform)
+                // Example: You might deploy to a server or cloud platform here
             }
         }
     }
