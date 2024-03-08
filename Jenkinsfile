@@ -37,13 +37,6 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                // Add deployment steps (e.g., deploy to hosting platform)
-                // Example: You might deploy to a server or cloud platform here
-            }
-        }
-    }
 
     post {
         success {
