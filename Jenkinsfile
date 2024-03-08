@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         nodejs "NodeJS"
-        git "github"
+        git "Default"
     }
 
     stages {
@@ -21,13 +21,13 @@ pipeline {
             }
         }
 
-       stage('Run Tests') {
-    steps {
-        script {
-            bat 'npm test --passWithNoTests'
+        stage('Run Tests') {
+            steps {
+                script {
+                    bat 'npm test'
+                }
+            }
         }
-    }
-}
 
         stage('Build') {
             steps {
