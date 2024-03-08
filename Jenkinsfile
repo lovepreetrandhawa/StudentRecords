@@ -21,14 +21,14 @@ pipeline {
             }
         }
 
-       stage('Run Tests') {
-    steps {
-        script {
-            bat 'npm install'
-            bat 'npm test -- --passWithNoTests'
+        stage('Run Tests') {
+            steps {
+                script {
+                    bat 'npm install'
+                    bat 'npm test -- --passWithNoTests'
+                }
+            }
         }
-    }
-}
 
         stage('Build') {
             steps {
@@ -37,15 +37,15 @@ pipeline {
                 }
             }
         }
-    }
 
-    stage('Deploy') {
+        stage('Deploy') {
             steps {
                 script {
-                    bat 'npm run -p 80:3000 StudentRecords'
+                    bat 'npm run start -- -p 3000'
                 }
-            }
-        }
+            }
+        }
+    }
 
     post {
         success {
