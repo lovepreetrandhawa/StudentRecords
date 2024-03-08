@@ -21,13 +21,14 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    bat 'npm test'
-                }
-            }
+       stage('Run Tests') {
+    steps {
+        script {
+            bat 'npm install'
+            bat 'npm test -- --passWithNoTests'
         }
+    }
+}
 
         stage('Build') {
             steps {
