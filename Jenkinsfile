@@ -39,6 +39,14 @@ pipeline {
         }
     }
 
+    stage('Deploy') {
+            steps {
+                script {
+                    bat 'npm run -p 80:3000 StudentRecords'
+                }
+            }
+        }
+
     post {
         success {
             echo 'Build and deployment successful!'
