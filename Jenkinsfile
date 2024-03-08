@@ -3,7 +3,6 @@ pipeline {
 
     tools {
         nodejs "NodeJS"
-        git ""
     }
 
     stages {
@@ -36,7 +35,7 @@ pipeline {
                 }
             }
         }
-
+    }
 
     post {
         success {
