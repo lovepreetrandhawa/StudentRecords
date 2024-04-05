@@ -24,8 +24,18 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                    // Install dependencies before running tests
                     bat 'npm install'
+                    // Run tests
                     bat 'npm test'
+                }
+            }
+            post {
+                success {
+                    echo 'Tests passed successfully!'
+                }
+                failure {
+                    echo 'Tests failed!'
                 }
             }
         }
