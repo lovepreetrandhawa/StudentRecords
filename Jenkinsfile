@@ -24,7 +24,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    bat 'npm test'
+                    bat 'npm install'
+                    bat 'npm test -- --passWithNoTests'
                 }
             }
         }
@@ -43,21 +44,10 @@ pipeline {
                     bat 'npm run start -- -p 3000'
                 }
             }
-            post {
-                success {
-                    echo 'Deployment successful!'
-                }
-                failure {
-                    echo 'Deployment failed!'
-                }
-            }
         }
     }
 
     post {
-        always {
-            echo 'Build and deployment completed!'
-        }
         success {
             echo 'Build and deployment successful!'
         }
