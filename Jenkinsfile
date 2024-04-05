@@ -51,7 +51,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    bat 'npm run build -- -p 3005'
+                    bat 'npm run build -- -p 3000'
                 }
             }
         }
