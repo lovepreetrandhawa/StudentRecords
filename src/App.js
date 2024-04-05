@@ -25,7 +25,7 @@ const StudentRecords = () => {
 
   return (
     <div className="container">
-      <h2>Manage Student Records</h2>
+      <h1>Add Student Records</h1>
       <label htmlFor="name">Name:</label>
       <input
         type="text"
