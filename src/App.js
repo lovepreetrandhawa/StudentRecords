@@ -30,12 +30,12 @@ const StudentRecords = () => {
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
+      width: '100vw'
     }}>
       <div style={{
         backgroundColor: '#f0f0f0',
         padding: '20px',
-        borderRadius: '5px',
-        width: '400px', // Set a fixed width for better display
+        borderRadius: '5px'
       }}>
         <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Add Student Records</h1>
         <div style={{ textAlign: 'center' }}>
