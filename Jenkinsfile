@@ -19,15 +19,6 @@ pipeline {
                     bat 'npm install'
                 }
             }
-            post {
-                success {
-                    echo 'Dependencies installed successfully!'
-                }
-                failure {
-                    echo 'Failed to install dependencies!'
-                    currentBuild.result = 'FAILURE'
-                }
-            }
         }
 
         stage('Run Tests') {
@@ -36,30 +27,12 @@ pipeline {
                     bat 'npm test'
                 }
             }
-            post {
-                success {
-                    echo 'Tests passed successfully!'
-                }
-                failure {
-                    echo 'Tests failed!'
-                    currentBuild.result = 'FAILURE'
-                }
-            }
         }
 
         stage('Build') {
             steps {
                 script {
                     bat 'npm run build'
-                }
-            }
-            post {
-                success {
-                    echo 'Build successful!'
-                }
-                failure {
-                    echo 'Build failed!'
-                    currentBuild.result = 'FAILURE'
                 }
             }
         }
@@ -76,7 +49,6 @@ pipeline {
                 }
                 failure {
                     echo 'Deployment failed!'
-                    currentBuild.result = 'FAILURE'
                 }
             }
         }
