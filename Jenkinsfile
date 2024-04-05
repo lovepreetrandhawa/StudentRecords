@@ -1,4 +1,3 @@
-pipeline {
     agent any
 
     tools {
@@ -19,6 +18,14 @@ pipeline {
                     bat 'npm install'
                 }
             }
+            post {
+                success {
+                    echo 'Dependencies installed successfully!'
+                }
+                failure {
+                    echo 'Failed to install dependencies!'
+                }
+            }
         }
 
         stage('Run Tests') {
@@ -33,6 +40,7 @@ pipeline {
                 }
                 failure {
                     echo 'Tests failed!'
+                    currentBuild.result = 'FAILURE'
                 }
             }
         }
@@ -43,6 +51,15 @@ pipeline {
                     bat 'npm run build'
                 }
             }
+            post {
+                success {
+                    echo 'Build successful!'
+                }
+                failure {
+                    echo 'Build failed!'
+                    currentBuild.result = 'FAILURE'
+                }
+            }
         }
 
         stage('Deploy') {
@@ -51,10 +68,22 @@ pipeline {
                     bat 'npm run start -- -p 3000'
                 }
             }
+            post {
+                success {
+                    echo 'Deployment successful!'
+                }
+                failure {
+                    echo 'Deployment failed!'
+                    currentBuild.result = 'FAILURE'
+                }
+            }
         }
     }
 
     post {
+        always {
+            echo 'Build and deployment completed!'
+        }
         success {
             echo 'Build and deployment successful!'
         }
