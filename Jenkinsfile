@@ -24,8 +24,15 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    bat 'npm install'
-                    bat 'npm test -- --passWithNoTests'
+                    bat 'npm test'
+                }
+            }
+            post {
+                success {
+                    echo 'Tests passed successfully!'
+                }
+                failure {
+                    echo 'Tests failed!'
                 }
             }
         }
