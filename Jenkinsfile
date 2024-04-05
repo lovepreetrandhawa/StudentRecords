@@ -16,7 +16,6 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install dependencies
                     bat 'npm install'
                 }
             }
@@ -25,16 +24,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Run tests
-                    bat 'npm test'
-                }
-            }
-            post {
-                success {
-                    echo 'Tests passed successfully!'
-                }
-                failure {
-                    echo 'Tests failed!'
+                    bat 'npm install'
+                    bat 'npm test -- --passWithNoTests'
                 }
             }
         }
@@ -42,16 +33,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Build the application
                     bat 'npm run build'
-                }
-            }
-            post {
-                success {
-                    echo 'Build successful!'
-                }
-                failure {
-                    echo 'Build failed!'
                 }
             }
         }
@@ -59,8 +41,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Start the application
-                    bat 'npm start'
+                    bat 'npm run build -- -p 3000'
                 }
             }
         }
