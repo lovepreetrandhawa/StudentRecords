@@ -1,3 +1,4 @@
+pipeline {
     agent any
 
     tools {
@@ -24,6 +25,7 @@
                 }
                 failure {
                     echo 'Failed to install dependencies!'
+                    currentBuild.result = 'FAILURE'
                 }
             }
         }
