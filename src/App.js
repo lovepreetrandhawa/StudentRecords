@@ -3,14 +3,24 @@ import React, { useState } from 'react';
 const StudentRecords = () => {
   const [name, setName] = useState('');
   const [grade, setGrade] = useState('');
+  const [error, setError] = useState('');
 
   const addRecord = () => {
+    if (name.trim() === '' || grade.trim() === '') {
+      setError('Name and grade fields cannot be empty');
+      return;
+    }
+    setError('');
     alert(`Record added:\nName: ${name}\nGrade: ${grade}`);
   };
 
   const clearFields = () => {
-    setName('');
-    setGrade('');
+    if (name !== '' || grade !== '') {
+      if (window.confirm('Are you sure you want to clear fields?')) {
+        setName('');
+        setGrade('');
+      }
+    }
   };
 
   return (
@@ -39,6 +49,8 @@ const StudentRecords = () => {
       />
 
       <br />
+
+      {error && <div className="error">{error}</div>}
 
       <button onClick={addRecord}>Add Record</button>
       <button onClick={clearFields}>Clear Fields</button>
