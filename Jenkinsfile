@@ -1,38 +1,58 @@
-{
-  "name": "addrecords",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --passWithNoTests", // Adjusted test script to pass with no tests
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+pipeline {
+    agent any
+
+    tools {
+        nodejs "NodeJS"
+        git "Default"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    bat 'npm install'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    bat 'npm install'
+                    bat 'npm test -- --passWithNoTests'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    bat 'npm run build'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    bat 'npm run build -- -p 3000'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and deployment successful!'
+        }
+        failure {
+            echo 'Build or deployment failed!'
+        }
+    }
 }
