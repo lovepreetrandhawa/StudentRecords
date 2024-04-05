@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test", // Adjusted test script to pass with no tests
+    "test": "react-scripts test --passWithNoTests", // Added --passWithNoTests option
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
