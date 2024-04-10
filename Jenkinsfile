@@ -24,6 +24,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                    bat 'npm install'
                     bat 'npm test -- --passWithNoTests'
                 }
             }
